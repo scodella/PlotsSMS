@@ -5,6 +5,9 @@ class sms():
     def __init__(self, modelname):
         if modelname.find("T1tttt") != -1: self.T1tttt()
         if modelname.find("T2tt") != -1: self.T2tt()
+        if modelname.find("T2bW") != -1: self.T2bW()
+        if modelname.find("TChiSlep") != -1: self.TChiSlep()
+        if modelname.find("TChiWW") != -1: self.TChiWW()
         if modelname.find("T5ttttDM175") != -1: self.T5ttttDM175()
         if modelname.find("T5tttt") != -1: self.T5tttt()
         if modelname.find("T1bbbb") != -1: self.T1bbbb()
@@ -56,6 +59,81 @@ class sms():
         self.diagOn = True
         self.boxOn = True
         
+    def TChiSlep(self):
+        # model name
+        self.modelname = "TChiSlep"
+        # decay chain
+        lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
+        charg = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{#pm}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
+        charp = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{+}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
+        charm = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{-}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
+        self.label= "pp #rightarrow "+charp+" "+charm+",  "+charg+" #rightarrow #tilde{l} #nu / #tilde{#nu} l,  #tilde{l} (#tilde{#nu}) #rightarrow l (#nu) "+lsp_s;
+        self.label2= "BR("+charg+" #rightarrow #tilde{l} #nu) = 0.5,  m#kern[0.1]{_{#lower[-0.12]{#tilde{l}(#tilde{#nu})}}} = (m#kern[0.1]{_{#lower[-0.12]{"+charg+"}}} + m#kern[0.1]{_{#lower[-0.12]{"+lsp_s+"}}})/2";
+        # scan range to plot
+        self.Xmin = 100.
+        self.Xmax = 1000.
+        self.Ymin = 0.
+        self.Ymax = 650.
+        self.Zmin = 0.001
+        self.Zmax = 100.
+        # produce sparticle
+        self.sParticle = "m#kern[0.1]{_{#lower[-0.12]{"+charg+"}}} [GeV]"
+        # LSP
+        self.LSP = "m#kern[0.1]{_{"+lsp_s+"}} [GeV]"
+        # turn off diagonal lines
+        self.diagOn = False
+        self.boxOn = False
+        
+    def TChiWW(self):
+        # model name
+        self.modelname = "TChiWW"
+        # decay chain
+        lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
+        charg = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{#pm}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
+        charp = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{+}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
+        charm = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{-}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
+        Wpm = "W#scale[0.85]{^{#pm}}"
+        self.label= "pp #rightarrow "+charp+" "+charm+",  "+charg+" #rightarrow "+Wpm+" "+lsp_s;
+        self.label2= "";
+        # scan range to plot
+        self.Xmin = 100.
+        self.Xmax = 350.
+        self.Ymin = 0.
+        self.Ymax = 450.
+        self.Zmin = 0.001
+        self.Zmax = 100.
+        # produce sparticle
+        self.sParticle = "m#kern[0.1]{_{#lower[-0.12]{"+charg+"}}} [GeV]"
+        # LSP
+        self.LSP = "m#kern[0.1]{_{"+lsp_s+"}} [GeV]"
+        # turn off diagonal lines
+        self.diagOn = False
+        self.boxOn = False
+       
+    def T2bW(self):
+        # model name
+        self.modelname = "T2bW"
+        # decay chain
+        lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
+        charg = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{#pm}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
+        Wpm = "W#scale[0.85]{^{#pm}}"
+        self.label= "pp #rightarrow #tilde{t} #tilde{t}, #tilde{t} #rightarrow b "+ charg + " #rightarrow b "+Wpm+" "+lsp_s;
+        self.label2= "#scale[0.8]{m_{"+charg+"} = (m_{#tilde{t}} + m_{"+lsp_s+"})/2}";
+        # scan range to plot
+        self.Xmin = 150.
+        self.Xmax = 1200.
+        self.Ymin = 0.
+        self.Ymax = 800.
+        self.Zmin = 0.001
+        self.Zmax = 100.
+        # produce sparticle
+        self.sParticle = "m#kern[0.1]{_{#lower[-0.12]{#tilde{t}}}} [GeV]"
+        # LSP
+        self.LSP = "m#kern[0.1]{_{"+lsp_s+"}} [GeV]"
+        # turn off diagonal lines
+        self.diagOn = False
+        self.boxOn = False
+ 
     def T5tttt(self):
         # model name
         self.modelname = "T1tttt"

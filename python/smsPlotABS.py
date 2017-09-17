@@ -120,14 +120,17 @@ class smsPlotABS(object):
             textModelLabel.SetTextSize(0.035)
             textModelLabel.Draw()
             self.c.textModelLabel = textModelLabel
-            textModelLabel2= rt.TLatex(0.15,0.845,"%s    NLO+NLL exclusion" %self.model.label2)
+            if(self.model.modelname=="T2bW" or self.model.modelname=="TChiSlep"):
+                textModelLabel2= rt.TLatex(0.15,0.845,"%s " %self.model.label2)
+            else:
+                textModelLabel2= rt.TLatex(0.15,0.845,"%s    NLO+NLL exclusion" %self.model.label2)
             textModelLabel2.SetNDC()
             textModelLabel2.SetTextAlign(13)
             textModelLabel2.SetTextFont(42)
             textModelLabel2.SetTextSize(0.035)
             textModelLabel2.Draw()
             self.c.textModelLabel2 = textModelLabel2
-        # NLO NLL XSEC
+        #NLO NLL XSEC
         textNLONLL= rt.TLatex(0.16,0.32,"NLO-NLL exclusion")
         textNLONLL.SetNDC()
         textNLONLL.SetTextAlign(13)
@@ -144,7 +147,8 @@ class smsPlotABS(object):
         if(self.model.label2 == ""):
             offset = 0
         else:
-            offset = -100
+            #offset = -100
+            offset = -40
         xRange = self.model.Xmax-self.model.Xmin
         yRange = self.model.Ymax-self.model.Ymin
         
@@ -178,7 +182,11 @@ class smsPlotABS(object):
         LObsM.SetPoint(0,self.model.Xmin+3*xRange/100, self.model.Ymax-1.50*yRange/100*10+offset)
         LObsM.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-1.50*yRange/100*10+offset)
 
-        textObs = rt.TLatex(self.model.Xmin+11*xRange/100, self.model.Ymax-1.50*yRange/100*10+offset, 
+        if (self.model.modelname=="T2bW" or self.model.modelname=="TChiSlep"):
+          textObs = rt.TLatex(self.model.Xmin+11*xRange/100, self.model.Ymax-1.50*yRange/100*10+offset,
+                            "Observed #pm 1 #sigma_{theory}     " + "NLO-NLL excl.")
+        else:	
+          textObs = rt.TLatex(self.model.Xmin+11*xRange/100, self.model.Ymax-1.50*yRange/100*10+offset, 
                             "Observed #pm 1 #sigma_{theory}")
         textObs.SetTextFont(42)
         textObs.SetTextSize(0.040)
@@ -242,6 +250,16 @@ class smsPlotABS(object):
         diagonal.Draw("FSAME")
         diagonal.Draw("LSAME")
         self.c.diagonal = diagonal
+
+    def DrawWDiagonal(self):
+        wdiagonal = rt.TGraph(2, array('d',[self.model.Xmin,self.model.Xmax]), array('d',[self.model.Xmin-80,self.model.Xmax-80]))
+        wdiagonal.SetName("wdiagonal")
+        wdiagonal.SetFillColor(rt.kWhite)
+        wdiagonal.SetLineColor(rt.kGray)
+        wdiagonal.SetLineStyle(2)
+        wdiagonal.Draw("FSAME")
+        wdiagonal.Draw("LSAME")
+        self.c.wdiagonal = wdiagonal
         
     def DrawLines(self):
         # observed
