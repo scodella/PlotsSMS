@@ -140,7 +140,8 @@ class smsPlotABS(object):
         #self.c.textNLONLL = textNLONLL
 
     def Save(self,label):
-        # save the output
+        # save the output        
+        self.c.SaveAs("%s.png" %label)
         self.c.SaveAs("%s.pdf" %label)
         
     def DrawLegend(self):
