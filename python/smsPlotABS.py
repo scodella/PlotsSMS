@@ -120,7 +120,7 @@ class smsPlotABS(object):
             textModelLabel.SetTextSize(0.035)
             textModelLabel.Draw()
             self.c.textModelLabel = textModelLabel
-            if(self.model.modelname=="T2bW" or self.model.modelname=="TChiSlep"):
+            if(self.model.modelname=="T2bW" or self.model.modelname=="TChipmSlepSnu"):
                 textModelLabel2= rt.TLatex(0.15,0.845,"%s " %self.model.label2)
             else:
                 textModelLabel2= rt.TLatex(0.15,0.845,"%s    NLO+NLL exclusion" %self.model.label2)
@@ -183,7 +183,7 @@ class smsPlotABS(object):
         LObsM.SetPoint(0,self.model.Xmin+3*xRange/100, self.model.Ymax-1.50*yRange/100*10+offset)
         LObsM.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-1.50*yRange/100*10+offset)
 
-        if (self.model.modelname=="T2bW" or self.model.modelname=="TChiSlep"):
+        if (self.model.modelname=="T2bW" or self.model.modelname=="TChipmSlepSnu"):
           textObs = rt.TLatex(self.model.Xmin+11*xRange/100, self.model.Ymax-1.50*yRange/100*10+offset,
                             "Observed #pm 1 #sigma_{theory}     " + "NLO-NLL excl.")
         else:	

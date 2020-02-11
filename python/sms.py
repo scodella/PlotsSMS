@@ -6,8 +6,8 @@ class sms():
         if modelname.find("T1tttt") != -1: self.T1tttt()
         if modelname.find("T2tt") != -1: self.T2tt()
         if modelname.find("T2bW") != -1: self.T2bW()
-        if modelname.find("TChiSlep") != -1: self.TChiSlep()
-        if modelname.find("TChiWW") != -1: self.TChiWW()
+        if modelname.find("TChipmSlepSnu") != -1: self.TChipmSlepSnu()
+        if modelname.find("TChipmWW") != -1: self.TChipmWW()
         if modelname.find("T5ttttDM175") != -1: self.T5ttttDM175()
         if modelname.find("T5tttt") != -1: self.T5tttt()
         if modelname.find("T1bbbb") != -1: self.T1bbbb()
@@ -59,9 +59,9 @@ class sms():
         self.diagOn = True
         self.boxOn = True
         
-    def TChiSlep(self):
+    def TChipmSlepSnu(self):
         # model name
-        self.modelname = "TChiSlep"
+        self.modelname = "TChipmSlepSnu"
         # decay chain
         lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
         charg = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{#pm}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
@@ -71,10 +71,10 @@ class sms():
         self.label2= "BR("+charg+" #rightarrow #tilde{l} #nu) = 0.5,  m#kern[0.1]{_{#lower[-0.12]{#tilde{l}(#tilde{#nu})}}} = (m#kern[0.1]{_{#lower[-0.12]{"+charg+"}}} + m#kern[0.1]{_{#lower[-0.12]{"+lsp_s+"}}})/2";
         # scan range to plot
         self.Xmin = 100.
-        self.Xmax = 1000.
+        self.Xmax = 1500.
         self.Ymin = 0.
-        self.Ymax = 650.
-        self.Zmin = 0.001
+        self.Ymax = 900.
+        self.Zmin = 0.0001
         self.Zmax = 100.
         # produce sparticle
         self.sParticle = "m#kern[0.1]{_{#lower[-0.12]{"+charg+"}}} [GeV]"
@@ -84,9 +84,9 @@ class sms():
         self.diagOn = False
         self.boxOn = False
         
-    def TChiWW(self):
+    def TChipmWW(self):
         # model name
-        self.modelname = "TChiWW"
+        self.modelname = "TChipmWW"
         # decay chain
         lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
         charg = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{#pm}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
