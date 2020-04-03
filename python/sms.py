@@ -71,10 +71,10 @@ class sms():
         self.label2= "BR("+charg+" #rightarrow #tilde{l} #nu) = 0.5,  m#kern[0.1]{_{#lower[-0.12]{#tilde{l}(#tilde{#nu})}}} = (m#kern[0.1]{_{#lower[-0.12]{"+charg+"}}} + m#kern[0.1]{_{#lower[-0.12]{"+lsp_s+"}}})/2";
         # scan range to plot
         self.Xmin = 100.
-        self.Xmax = 1500.
+        self.Xmax = 1000. #1500.
         self.Ymin = 0.
-        self.Ymax = 900.
-        self.Zmin = 0.0001
+        self.Ymax = 650. #900.
+        self.Zmin = 0.001 #0.0001
         self.Zmax = 100.
         # produce sparticle
         self.sParticle = "m#kern[0.1]{_{#lower[-0.12]{"+charg+"}}} [GeV]"
@@ -97,9 +97,9 @@ class sms():
         self.label2= "";
         # scan range to plot
         self.Xmin = 100.
-        self.Xmax = 350.
+        self.Xmax = 500.
         self.Ymin = 0.
-        self.Ymax = 450.
+        self.Ymax = 500.
         self.Zmin = 0.001
         self.Zmax = 100.
         # produce sparticle
