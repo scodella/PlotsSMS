@@ -8,6 +8,7 @@ class sms():
         if modelname.find("T2bW") != -1: self.T2bW()
         if modelname.find("TChipmSlepSnu") != -1: self.TChipmSlepSnu()
         if modelname.find("TChipmWW") != -1: self.TChipmWW()
+        if modelname.find("TSlepSlep") != -1: self.TSlepSlep()
         if modelname.find("T5ttttDM175") != -1: self.T5ttttDM175()
         if modelname.find("T5tttt") != -1: self.T5tttt()
         if modelname.find("T1bbbb") != -1: self.T1bbbb()
@@ -78,6 +79,32 @@ class sms():
         self.Zmax = 100.
         # produce sparticle
         self.sParticle = "m#kern[0.1]{_{#lower[-0.12]{"+charg+"}}} [GeV]"
+        # LSP
+        self.LSP = "m#kern[0.1]{_{"+lsp_s+"}} [GeV]"
+        # turn off diagonal lines
+        self.diagOn = False
+        self.boxOn = False
+        
+    def TSlepSlep(self):
+        # model name
+        self.modelname = "TSlepSlep"
+        # decay chain
+        lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
+        slep  = "#lower[-0.12]{#tilde{#font[12]{l}}}"
+        sele  = "#lower[-0.12]{#tilde{#font[12]{e}}}#kern[0]{#scale[0.85]{_{L/R}}}"
+        smuo  = "#lower[-0.12]{#tilde{#mu}}#kern[0]{#scale[0.85]{_{L/R}}}"
+        Wpm = "W#scale[0.85]{^{#pm}}"
+        self.label= "pp #rightarrow "+sele+" "+sele+",  "+smuo+" "+smuo
+        self.label2= "BR("+slep+" #rightarrow #font[12]{l} "+lsp_s+") = 1"
+        # scan range to plot
+        self.Xmin = 100.
+        self.Xmax = 1000. 
+        self.Ymin = 0.
+        self.Ymax = 900.
+        self.Zmin = 0.0001
+        self.Zmax = 2.
+        # produce sparticle
+        self.sParticle = "m#kern[0.1]{_{#lower[-0.12]{"+slep+"}}} [GeV]"
         # LSP
         self.LSP = "m#kern[0.1]{_{"+lsp_s+"}} [GeV]"
         # turn off diagonal lines
