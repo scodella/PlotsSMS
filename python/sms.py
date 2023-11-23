@@ -47,10 +47,10 @@ class sms():
         self.label2= "";
         # scan range to plot
         self.Xmin = 150.
-        self.Xmax = 1200.
+        self.Xmax = 700. #1200.
         self.Ymin = 0.
-        self.Ymax = 1200.
-        self.Zmin = 0.001
+        self.Ymax = 900. #1200.
+        self.Zmin = 0.01 #0.001
         self.Zmax = 100.
         # produce sparticle
         self.sParticle = "m#kern[0.1]{_{#lower[-0.12]{#tilde{t}}}} [GeV]"
@@ -72,10 +72,10 @@ class sms():
         self.label2= "BR("+charg+" #rightarrow #tilde{l} #nu) = 0.5,  m#kern[0.1]{_{#lower[-0.12]{#tilde{l}(#tilde{#nu})}}} = (m#kern[0.1]{_{#lower[-0.12]{"+charg+"}}} + m#kern[0.1]{_{#lower[-0.12]{"+lsp_s+"}}})/2";
         # scan range to plot
         self.Xmin = 100.
-        self.Xmax = 1000. #1500.
+        self.Xmax = 1500.
         self.Ymin = 0.
-        self.Ymax = 650. #900.
-        self.Zmin = 0.001 #0.0001
+        self.Ymax = 900.
+        self.Zmin = 0.0001
         self.Zmax = 100.
         # produce sparticle
         self.sParticle = "m#kern[0.1]{_{#lower[-0.12]{"+charg+"}}} [GeV]"
@@ -94,13 +94,16 @@ class sms():
         sele  = "#lower[-0.12]{#tilde{#font[12]{e}}}#kern[0]{#scale[0.85]{_{L/R}}}"
         smuo  = "#lower[-0.12]{#tilde{#mu}}#kern[0]{#scale[0.85]{_{L/R}}}"
         Wpm = "W#scale[0.85]{^{#pm}}"
-        self.label= "pp #rightarrow "+sele+" "+sele+",  "+smuo+" "+smuo
-        self.label2= "BR("+slep+" #rightarrow #font[12]{l} "+lsp_s+") = 1"
+        #self.label= "pp #rightarrow "+sele+" "+sele+",  "+smuo+" "+smuo
+        #self.label2= "BR("+slep+" #rightarrow #font[12]{l} "+lsp_s+") = 1"
+        self.label= "pp #rightarrow "+sele+" "+sele+"/"+smuo+" "+smuo+", "+slep+"#rightarrow #font[12]{l} "+lsp_s
+        self.label2= ""
         # scan range to plot
         self.Xmin = 100.
         self.Xmax = 1000. 
         self.Ymin = 0.
-        self.Ymax = 900.
+        #self.Ymax = 900.
+        self.Ymax = 800.
         self.Zmin = 0.0001
         self.Zmax = 2.
         # produce sparticle
@@ -124,9 +127,9 @@ class sms():
         self.label2= "";
         # scan range to plot
         self.Xmin = 100.
-        self.Xmax = 500.
+        self.Xmax = 600.
         self.Ymin = 0.
-        self.Ymax = 500.
+        self.Ymax = 300.
         self.Zmin = 0.001
         self.Zmax = 100.
         # produce sparticle
@@ -147,8 +150,8 @@ class sms():
         self.label= "pp #rightarrow #tilde{t} #tilde{t}, #tilde{t} #rightarrow b "+ charg + " #rightarrow b "+Wpm+" "+lsp_s;
         self.label2= "#scale[0.8]{m_{"+charg+"} = (m_{#tilde{t}} + m_{"+lsp_s+"})/2}";
         # scan range to plot
-        self.Xmin = 150.
-        self.Xmax = 1200.
+        self.Xmin = 200.
+        self.Xmax = 1000.
         self.Ymin = 0.
         self.Ymax = 800.
         self.Zmin = 0.001

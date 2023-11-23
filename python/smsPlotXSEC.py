@@ -35,7 +35,7 @@ class smsPlotXSEC(smsPlotABS):
         blue = array("d",[1.00, 1.00, 0.50, 0.40, 0.50])
         rt.TColor.CreateGradientColorTable(NRGBs, stops, red, green, blue, NCont)
         rt.gStyle.SetNumberContours(NCont)
-        
+
         self.c.cd()
         self.histo.Draw("colz")
         

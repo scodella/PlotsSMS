@@ -105,7 +105,12 @@ class smsPlotABS(object):
         self.c.textCMS = textCMS
         # MODEL LABEL
         if(self.model.label2 == ""):
-            textModelLabel= rt.TLatex(0.15,0.90,"%s   NLO+NLL exclusion" %self.model.label)
+            if self.model.modelname=="T2tt":
+                textModelLabel= rt.TLatex(0.15,0.90,"%s   NNLO_{approx}+NNLL exclusion" %self.model.label)
+            elif self.model.modelname=="TSlepSlep":
+                textModelLabel= rt.TLatex(0.15,0.90,"%s   NLO+NLL excl." %self.model.label)
+            else:
+                textModelLabel= rt.TLatex(0.15,0.90,"%s   NLO+NLL exclusion" %self.model.label)
             textModelLabel.SetNDC()
             textModelLabel.SetTextAlign(13)
             textModelLabel.SetTextFont(42)
@@ -120,8 +125,10 @@ class smsPlotABS(object):
             textModelLabel.SetTextSize(0.035)
             textModelLabel.Draw()
             self.c.textModelLabel = textModelLabel
-            if(self.model.modelname=="T2bW" or self.model.modelname=="TChipmSlepSnu" or self.model.modelname=="TSlepSlep"):
+            if self.model.modelname=="TChipmSlepSnu":
                 textModelLabel2= rt.TLatex(0.15,0.845,"%s " %self.model.label2)
+            elif self.model.modelname=="T2bW":
+                textModelLabel2= rt.TLatex(0.15,0.845,"%s        NNLO_{approx}+NNLL exclusion" %self.model.label2)
             else:
                 textModelLabel2= rt.TLatex(0.15,0.845,"%s    NLO+NLL exclusion" %self.model.label2)
             textModelLabel2.SetNDC()
@@ -183,7 +190,7 @@ class smsPlotABS(object):
         LObsM.SetPoint(0,self.model.Xmin+3*xRange/100, self.model.Ymax-1.50*yRange/100*10+offset)
         LObsM.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-1.50*yRange/100*10+offset)
 
-        if (self.model.modelname=="T2bW" or self.model.modelname=="TChipmSlepSnu" or self.model.modelname=="TSlepSlep"):
+        if self.model.modelname=="TChipmSlepSnu":
           textObs = rt.TLatex(self.model.Xmin+11*xRange/100, self.model.Ymax-1.50*yRange/100*10+offset,
                             "Observed #pm 1 #sigma_{theory}     " + "NLO-NLL excl.")
         else:	
@@ -220,6 +227,26 @@ class smsPlotABS(object):
         LExpM.SetLineWidth(2)  
         LExpM.SetPoint(0,self.model.Xmin+3*xRange/100, self.model.Ymax-2.15*yRange/100*10+offset)
         LExpM.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-2.15*yRange/100*10+offset)
+
+        if self.EXP['add2sigma']:
+
+          LExpP2 = rt.TGraph(2)
+          LExpP2.SetName("LExpP2")
+          LExpP2.SetTitle("LExpP2")
+          LExpP2.SetLineColor(color(self.EXP['colorLine']))
+          LExpP2.SetLineStyle(8)
+          LExpP2.SetLineWidth(2)
+          LExpP2.SetPoint(0,self.model.Xmin+3*xRange/100, self.model.Ymax-2.00*yRange/100*10+offset)
+          LExpP2.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-2.00*yRange/100*10+offset) 
+
+          LExpM2 = rt.TGraph(2)
+          LExpM2.SetName("LExpM2")
+          LExpM2.SetTitle("LExpM2")
+          LExpM2.SetLineColor(color(self.EXP['colorLine']))
+          LExpM2.SetLineStyle(8)
+          LExpM2.SetLineWidth(2)
+          LExpM2.SetPoint(0,self.model.Xmin+3*xRange/100, self.model.Ymax-2.00*yRange/100*10+offset)
+          LExpM2.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-2.00*yRange/100*10+offset)
 
         textExp = rt.TLatex(self.model.Xmin+11*xRange/100, self.model.Ymax-2.15*yRange/100*10+offset, 
                             "Expected #pm 1 #sigma_{experiment}")
@@ -286,14 +313,26 @@ class smsPlotABS(object):
         # expected - 1sigma
         self.EXP['minus'].SetLineColor(color(self.EXP['colorLine']))
         self.EXP['minus'].SetLineStyle(7)
-        self.EXP['minus'].SetLineWidth(2)                        
+        self.EXP['minus'].SetLineWidth(2)
+        if self.EXP['add2sigma']:
+          # expected + 2sigma
+          self.EXP['plus2'].SetLineColor(color(self.EXP['colorLine']))
+          self.EXP['plus2'].SetLineStyle(8)
+          self.EXP['plus2'].SetLineWidth(2)       
+          # expected - 2sigma
+          self.EXP['minus2'].SetLineColor(color(self.EXP['colorLine']))
+          self.EXP['minus2'].SetLineStyle(8)
+          self.EXP['minus2'].SetLineWidth(2)                 
         # DRAW LINES
         self.EXP['nominal'].Draw("LSAME")
         self.EXP['plus'].Draw("LSAME")
         self.EXP['minus'].Draw("LSAME")
+        if self.EXP['add2sigma']:
+          self.EXP['plus2'].Draw("LSAME")
+          self.EXP['minus2'].Draw("LSAME")
         self.OBS['nominal'].Draw("LSAME")
         self.OBS['plus'].Draw("LSAME")
-        self.OBS['minus'].Draw("LSAME")        
+        self.OBS['minus'].Draw("LSAME")    
         
     def DrawCorridor(self):
         ## Moriond Recommendation for T2tt.

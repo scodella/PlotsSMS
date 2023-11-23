@@ -42,7 +42,10 @@ class inputFile():
                     'plus': rootFileIn.Get(tmpLINE[3]),
                     'minus': rootFileIn.Get(tmpLINE[4]),
                     'colorLine': tmpLINE[5],
-                    'colorArea': tmpLINE[6]}
+                    'colorArea': tmpLINE[6],
+                    'add2sigma': int(tmpLINE[7]),
+                    'plus2': rootFileIn.Get(tmpLINE[8]),
+                    'minus2': rootFileIn.Get(tmpLINE[9])}
 
     def findOBSERVED(self, fileName):
         fileIN = open(fileName)        
