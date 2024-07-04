@@ -200,6 +200,8 @@ class smsPlotABS(object):
         textObs.SetTextSize(0.040)
         textObs.Draw()
         self.c.textObs = textObs
+ 
+        oneSigmaOffset = 0.09 if self.EXP['add2sigma'] else 0.15 
 
         LExpP = rt.TGraph(2)
         LExpP.SetName("LExpP")
@@ -207,8 +209,8 @@ class smsPlotABS(object):
         LExpP.SetLineColor(color(self.EXP['colorLine']))
         LExpP.SetLineStyle(7)
         LExpP.SetLineWidth(2)  
-        LExpP.SetPoint(0,self.model.Xmin+3*xRange/100, self.model.Ymax-1.85*yRange/100*10+offset)
-        LExpP.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-1.85*yRange/100*10+offset)
+        LExpP.SetPoint(0,self.model.Xmin+3*xRange/100, self.model.Ymax-(2.00-oneSigmaOffset)*yRange/100*10+offset)
+        LExpP.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-(2.00-oneSigmaOffset)*yRange/100*10+offset)
 
         LExp = rt.TGraph(2)
         LExp.SetName("LExp")
@@ -225,8 +227,8 @@ class smsPlotABS(object):
         LExpM.SetLineColor(color(self.EXP['colorLine']))
         LExpM.SetLineStyle(7)
         LExpM.SetLineWidth(2)  
-        LExpM.SetPoint(0,self.model.Xmin+3*xRange/100, self.model.Ymax-2.15*yRange/100*10+offset)
-        LExpM.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-2.15*yRange/100*10+offset)
+        LExpM.SetPoint(0,self.model.Xmin+3*xRange/100, self.model.Ymax-(2.00+oneSigmaOffset)*yRange/100*10+offset)
+        LExpM.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-(2.00+oneSigmaOffset)*yRange/100*10+offset)
 
         if self.EXP['add2sigma']:
 
@@ -236,8 +238,8 @@ class smsPlotABS(object):
           LExpP2.SetLineColor(color(self.EXP['colorLine']))
           LExpP2.SetLineStyle(8)
           LExpP2.SetLineWidth(2)
-          LExpP2.SetPoint(0,self.model.Xmin+3*xRange/100, self.model.Ymax-2.00*yRange/100*10+offset)
-          LExpP2.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-2.00*yRange/100*10+offset) 
+          LExpP2.SetPoint(0,self.model.Xmin+3*xRange/100, self.model.Ymax-1.82*yRange/100*10+offset)
+          LExpP2.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-1.82*yRange/100*10+offset) 
 
           LExpM2 = rt.TGraph(2)
           LExpM2.SetName("LExpM2")
@@ -245,8 +247,8 @@ class smsPlotABS(object):
           LExpM2.SetLineColor(color(self.EXP['colorLine']))
           LExpM2.SetLineStyle(8)
           LExpM2.SetLineWidth(2)
-          LExpM2.SetPoint(0,self.model.Xmin+3*xRange/100, self.model.Ymax-2.00*yRange/100*10+offset)
-          LExpM2.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-2.00*yRange/100*10+offset)
+          LExpM2.SetPoint(0,self.model.Xmin+3*xRange/100, self.model.Ymax-2.18*yRange/100*10+offset)
+          LExpM2.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-2.18*yRange/100*10+offset)
 
         if self.EXP['add2sigma']:
             textExp = rt.TLatex(self.model.Xmin+11*xRange/100, self.model.Ymax-2.15*yRange/100*10+offset, 
@@ -265,13 +267,19 @@ class smsPlotABS(object):
         LExp.Draw("LSAME")
         LExpM.Draw("LSAME")
         LExpP.Draw("LSAME")
-        
+        if self.EXP['add2sigma']:
+            LExpM2.Draw("LSAME")
+            LExpP2.Draw("LSAME")
+
         self.c.LObs = LObs
         self.c.LObsM = LObsM
         self.c.LObsP = LObsP
         self.c.LExp = LExp
         self.c.LExpM = LExpM
         self.c.LExpP = LExpP
+        if self.EXP['add2sigma']:
+            self.c.LExpM2 = LExpM2
+            self.c.LExpP2 = LExpP2
 
     def DrawDiagonal(self):
         diagonal = rt.TGraph(2, array('d',[self.model.Xmin,self.model.Xmax]), array('d',[self.model.Xmin-175,self.model.Xmax-175]))
