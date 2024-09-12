@@ -53,6 +53,7 @@ class smsPlotABS(object):
         self.emptyHisto.GetXaxis().SetTitleSize(0.05)
         self.emptyHisto.GetXaxis().SetTitleOffset(1.2)
         self.emptyHisto.GetXaxis().SetTitle(self.model.sParticle)
+        self.emptyHisto.GetXaxis().SetNdivisions(505)
         #self.emptyHisto.GetXaxis().CenterTitle(True)
 
         # set y axis
@@ -126,7 +127,7 @@ class smsPlotABS(object):
             textModelLabel.Draw()
             self.c.textModelLabel = textModelLabel
             if self.model.modelname=="TChipmSlepSnu":
-                textModelLabel2= rt.TLatex(0.15,0.845,"%s " %self.model.label2)
+                textModelLabel2= rt.TLatex(0.15,0.856,"%s " %self.model.label2)
             elif self.model.modelname=="T2bW":
                 textModelLabel2= rt.TLatex(0.15,0.845,"%s        NNLO_{approx}+NNLL exclusion" %self.model.label2)
             else:
@@ -236,7 +237,7 @@ class smsPlotABS(object):
           LExpP2.SetName("LExpP2")
           LExpP2.SetTitle("LExpP2")
           LExpP2.SetLineColor(color(self.EXP['colorLine']))
-          LExpP2.SetLineStyle(8)
+          LExpP2.SetLineStyle(3)
           LExpP2.SetLineWidth(2)
           LExpP2.SetPoint(0,self.model.Xmin+3*xRange/100, self.model.Ymax-1.82*yRange/100*10+offset)
           LExpP2.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-1.82*yRange/100*10+offset) 
@@ -245,7 +246,7 @@ class smsPlotABS(object):
           LExpM2.SetName("LExpM2")
           LExpM2.SetTitle("LExpM2")
           LExpM2.SetLineColor(color(self.EXP['colorLine']))
-          LExpM2.SetLineStyle(8)
+          LExpM2.SetLineStyle(3)
           LExpM2.SetLineWidth(2)
           LExpM2.SetPoint(0,self.model.Xmin+3*xRange/100, self.model.Ymax-2.18*yRange/100*10+offset)
           LExpM2.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-2.18*yRange/100*10+offset)
@@ -329,11 +330,11 @@ class smsPlotABS(object):
         if self.EXP['add2sigma']:
           # expected + 2sigma
           self.EXP['plus2'].SetLineColor(color(self.EXP['colorLine']))
-          self.EXP['plus2'].SetLineStyle(8)
+          self.EXP['plus2'].SetLineStyle(3)
           self.EXP['plus2'].SetLineWidth(2)       
           # expected - 2sigma
           self.EXP['minus2'].SetLineColor(color(self.EXP['colorLine']))
-          self.EXP['minus2'].SetLineStyle(8)
+          self.EXP['minus2'].SetLineStyle(3)
           self.EXP['minus2'].SetLineWidth(2)                 
         # DRAW LINES
         self.EXP['nominal'].Draw("LSAME")
