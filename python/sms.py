@@ -42,8 +42,11 @@ class sms():
         # model name
         self.modelname = "T2tt"
         # decay chain
+        stop = '#tilde{t}_{1}'
+        stopbar = "#bar{#kern[0.1]{"+stop+"}}"  #"#bar{#tilde{t}}_{1}" 
         lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
-        self.label= "pp #rightarrow #tilde{t} #tilde{t}, #tilde{t} #rightarrow t "+lsp_s;
+        #self.label= "pp #rightarrow "+stop+" #bar{"+stop+"}, "+stop+" #rightarrow t "+lsp_s;
+        self.label= "pp #rightarrow "+stop+"#kern[0.15]{"+stopbar+"},#kern[0.6]{"+stop+"}#kern[0.3]{#rightarrow}#kern[0.4]{t}#kern[0.15]{"+lsp_s+"}";
         self.label2= "";
         # scan range to plot
         self.Xmin = 150.
@@ -53,7 +56,7 @@ class sms():
         self.Zmin = 0.01 #0.001
         self.Zmax = 100.
         # produce sparticle
-        self.sParticle = "m#kern[0.1]{_{#lower[-0.12]{#tilde{t}}}} [GeV]"
+        self.sParticle = "m#kern[0.1]{_{#lower[-0.12]{"+stop+"}}} [GeV]"
         # LSP
         self.LSP = "m#kern[0.1]{_{"+lsp_s+"}} [GeV]"
         # turn off diagonal lines
@@ -69,6 +72,7 @@ class sms():
         charp = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{+}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
         charm = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{-}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
         self.label= "pp #rightarrow "+charp+" "+charm+",  "+charg+" #rightarrow #tilde{l} #nu / #tilde{#nu} l,  #tilde{l} (#tilde{#nu}) #rightarrow l (#nu) "+lsp_s;
+        #self.label= "pp\\rightarrow "+charp.replace('#','\\')+" "+charm.replace('#','\\')+",  "+charg.replace('#','\\')+"\\rightarrow\\tilde{\\ell}\\nu/\\tilde{\\nu}\\ell, \\tilde{\\ell} (\\tilde{\\nu})\\rightarrow\ell (\\nu) "+lsp_s.replace('#','\\');
         self.label2= "BR("+charg+" #rightarrow #tilde{l} #nu) = 0.5,  m#kern[0.1]{_{#lower[-0.12]{#tilde{l}(#tilde{#nu})}}} = (m#kern[0.1]{_{#lower[-0.12]{"+charg+"}}} + m#kern[0.1]{_{#lower[-0.12]{"+lsp_s+"}}})/2";
         # scan range to plot
         self.Xmin = 100.
@@ -90,7 +94,8 @@ class sms():
         self.modelname = "TSlepSlep"
         # decay chain
         lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
-        slep  = "#lower[-0.12]{#tilde{#font[12]{l}}}"
+        #slep  = "#lower[-0.12]{#tilde{#font[12]{l}}}"
+        slep  = "#tilde{#font[12]{l}}"
         sele  = "#lower[-0.12]{#tilde{#font[12]{e}}}#kern[0]{#scale[0.85]{_{L/R}}}"
         smuo  = "#lower[-0.12]{#tilde{#mu}}#kern[0]{#scale[0.85]{_{L/R}}}"
         Wpm = "W#scale[0.85]{^{#pm}}"
@@ -144,11 +149,15 @@ class sms():
         # model name
         self.modelname = "T2bW"
         # decay chain
+        stop = '#tilde{t}_{1}'
+        stopbar = "#bar{#kern[0.1]{"+stop+"}}"  #"#bar{#tilde{t}}_{1}"
         lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
         charg = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{#pm}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
         Wpm = "W#scale[0.85]{^{#pm}}"
-        self.label= "pp #rightarrow #tilde{t} #tilde{t}, #tilde{t} #rightarrow b "+ charg + " #rightarrow b "+Wpm+" "+lsp_s;
-        self.label2= "#scale[0.8]{m_{"+charg+"} = (m_{#tilde{t}} + m_{"+lsp_s+"})/2}";
+        #self.label= "pp #rightarrow #tilde{t} #tilde{t}, #tilde{t} #rightarrow b "+ charg + " #rightarrow b "+Wpm+" "+lsp_s;
+        self.label= "pp #rightarrow "+stop+"#kern[0.15]{"+stopbar+"},#kern[0.7]{"+stop+"}#kern[0.3]{#rightarrow}#kern[0.4]{b}#kern[0.15]{"+charg+"}#kern[0.3]{#rightarrow}#kern[0.4]{b}#kern[0.1]{"+Wpm+"}#kern[0.2]{"+lsp_s+"}";
+        self.label2= "#scale[0.8]{m_{"+charg+"} = (m#kern[0.1]{_{#lower[-0.07]{#tilde{t}#kern[-0.05]{_{1}}}}} + m_{"+lsp_s+"})/2}";
+
         # scan range to plot
         self.Xmin = 200.
         self.Xmax = 1000.
@@ -157,7 +166,7 @@ class sms():
         self.Zmin = 0.001
         self.Zmax = 100.
         # produce sparticle
-        self.sParticle = "m#kern[0.1]{_{#lower[-0.12]{#tilde{t}}}} [GeV]"
+        self.sParticle = "m#kern[0.1]{_{#lower[-0.12]{"+stop+"}}} [GeV]"
         # LSP
         self.LSP = "m#kern[0.1]{_{"+lsp_s+"}} [GeV]"
         # turn off diagonal lines

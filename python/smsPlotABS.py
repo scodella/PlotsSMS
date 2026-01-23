@@ -53,7 +53,8 @@ class smsPlotABS(object):
         self.emptyHisto.GetXaxis().SetTitleSize(0.05)
         self.emptyHisto.GetXaxis().SetTitleOffset(1.2)
         self.emptyHisto.GetXaxis().SetTitle(self.model.sParticle)
-        self.emptyHisto.GetXaxis().SetNdivisions(505)
+        if self.model.modelname=="TChipmWW": 
+            self.emptyHisto.GetXaxis().SetNdivisions(505)
         #self.emptyHisto.GetXaxis().CenterTitle(True)
 
         # set y axis
@@ -90,14 +91,16 @@ class smsPlotABS(object):
         graphWhite.Draw("LSAME")
         self.c.graphWhite = graphWhite
        	CMS_lumi.writeExtraText = 0
-	CMS_lumi.extraText = self.preliminary
-	CMS_lumi.lumi_13TeV = self.lumi+" fb^{-1}"
+        CMS_lumi.extraText = self.preliminary
+        CMS_lumi.lumi_13TeV = self.lumi+" fb^{-1}"
 
-	CMS_lumi.lumi_sqrtS = self.energy+" TeV"  
-	iPos=0
-	CMS_lumi.CMS_lumi(self.c,4, iPos)
+        CMS_lumi.lumi_sqrtS = self.energy+" TeV"  
+        iPos=0
+        scaleCMSTextSize = 0.9 if "Work" in self.preliminary else 1.
+        scalePreliminaryPos = 1. - 0.6*(1.-scaleCMSTextSize)
+        CMS_lumi.CMS_lumi(self.c,4, iPos, scaleCMSTextSize)
         # CMS LABEL
-        textCMS = rt.TLatex(0.25,0.96,"  %s " %(self.preliminary))
+        textCMS = rt.TLatex(0.25*scalePreliminaryPos,0.96,"  %s " %(self.preliminary))
         textCMS.SetNDC()
         textCMS.SetTextAlign(13)
         textCMS.SetTextFont(52)
@@ -107,7 +110,7 @@ class smsPlotABS(object):
         # MODEL LABEL
         if(self.model.label2 == ""):
             if self.model.modelname=="T2tt":
-                textModelLabel= rt.TLatex(0.15,0.90,"%s   NNLO_{approx}+NNLL exclusion" %self.model.label)
+                textModelLabel= rt.TLatex(0.15,0.912,"%s  NNLO_{approx}+NNLL exclusion" %self.model.label)
             elif self.model.modelname=="TSlepSlep":
                 textModelLabel= rt.TLatex(0.15,0.90,"%s   NLO+NLL excl." %self.model.label)
             else:
@@ -119,7 +122,10 @@ class smsPlotABS(object):
             textModelLabel.Draw()
             self.c.textModelLabel = textModelLabel
         else:
-            textModelLabel= rt.TLatex(0.15,0.91,"%s" %self.model.label)
+            if self.model.modelname=="T2bW":
+                textModelLabel= rt.TLatex(0.15,0.922,"%s" %self.model.label)
+            else:
+                textModelLabel= rt.TLatex(0.15,0.91,"%s" %self.model.label)
             textModelLabel.SetNDC()
             textModelLabel.SetTextAlign(13)
             textModelLabel.SetTextFont(42)
@@ -374,3 +380,15 @@ class smsPlotABS(object):
         whitebox.SetFillColor(rt.kWhite)
         whitebox.Draw("FSAME")
         self.c.whitebox = whitebox
+
+        # Draw contour for SUS-23-002
+        l1x, l1y, l2x, l2y, l3x, l3y = 150., 0., 265.5, 109.5, 278., 97.
+        l1 = rt.TLine(150., 0., 262.5, 112.5)
+        l2 = rt.TLine(262.5-1, 112.5+1, 275.+3., 100.-3.)
+        l1.SetLineWidth(4)
+        l2.SetLineWidth(4)
+        l1.Draw("same")
+        l2.Draw("same")
+        self.c.l1 = l1
+        self.c.l2 = l2
+

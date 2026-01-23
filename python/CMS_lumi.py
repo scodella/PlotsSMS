@@ -32,7 +32,7 @@ lumi_sqrtS = ""
 
 drawLogo      = False
 
-def CMS_lumi(pad,  iPeriod,  iPosX ):
+def CMS_lumi(pad,  iPeriod,  iPosX, scaleTextSize=1. ):
     outOfFrame    = False
     if(iPosX/10==0 ): outOfFrame = True
 
@@ -95,18 +95,18 @@ def CMS_lumi(pad,  iPeriod,  iPosX ):
     latex.SetTextAngle(0)
     latex.SetTextColor(rt.kBlack)    
     
-    extraTextSize = extraOverCmsTextSize*cmsTextSize
+    extraTextSize = extraOverCmsTextSize*cmsTextSize*scaleTextSize
     
     latex.SetTextFont(42)
     latex.SetTextAlign(31) 
-    latex.SetTextSize(lumiTextSize*t)    
+    latex.SetTextSize(lumiTextSize*t*scaleTextSize)    
 
     latex.DrawLatex(1-r,1-t+lumiTextOffset*t,lumiText)
 
     if( outOfFrame ):
         latex.SetTextFont(cmsTextFont)
         latex.SetTextAlign(11) 
-        latex.SetTextSize(cmsTextSize*t)    
+        latex.SetTextSize(cmsTextSize*t*scaleTextSize)    
         latex.DrawLatex(l,1-t+lumiTextOffset*t,cmsText)
   
     pad.cd()
@@ -138,14 +138,14 @@ def CMS_lumi(pad,  iPeriod,  iPosX ):
             pad.cd()          
         else:
             latex.SetTextFont(cmsTextFont)
-            latex.SetTextSize(cmsTextSize*t)
+            latex.SetTextSize(cmsTextSize*t*scaleTextSize)
             latex.SetTextAlign(align_)
             latex.DrawLatex(posX_, posY_, cmsText)
             if( writeExtraText ) :
                 latex.SetTextFont(extraTextFont)
                 latex.SetTextAlign(align_)
                 latex.SetTextSize(extraTextSize*t)
-                latex.DrawLatex(posX_, posY_- relExtraDY*cmsTextSize*t, extraText)
+                latex.DrawLatex(posX_, posY_- relExtraDY*cmsTextSize*t*scaleTextSize, extraText)
     elif( writeExtraText ):
         if( iPosX==0):
             posX_ =   l +  relPosX*(1-l-r)
